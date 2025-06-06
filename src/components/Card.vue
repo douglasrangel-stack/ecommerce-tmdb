@@ -64,6 +64,9 @@ const formattedReleaseDate = computed(() => {
 
 .w-card {
   width: calc(25% - 20px);
+  @media (max-width: 767px) {
+    width: calc(50% - 20px);
+  }
 }
 
 .w-card-image {

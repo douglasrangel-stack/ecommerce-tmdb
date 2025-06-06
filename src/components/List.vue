@@ -25,11 +25,14 @@ const props = defineProps({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .gap-20 {
   gap: 20px;
 }
 .space-page {
   padding: 60px 0;
+  @media (max-width: 767px) {
+    padding-top: 100px;
+  }
 }
 </style>

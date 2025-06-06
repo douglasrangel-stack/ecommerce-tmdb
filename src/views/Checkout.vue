@@ -116,11 +116,20 @@ const handleSubmit = () => {
 };
 </script>
 
+<style scoped lang="scss">
+.container-checkout {
+  width: 1200px;
+  max-width: 100%;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+</style>
+
 <template>
   <v-app>
     <main
-      style="width: 1200px; max-width: 100%"
-      class="container mx-auto py-8 pt-40 sm:px-4 sm:pt-32"
+      class="container mx-auto py-8 pt-40 sm:px-4 sm:pt-32 container-checkout"
     >
       <v-container class="pt-16">
         <v-row>

@@ -53,17 +53,29 @@ const toggleFavorites = () => {
 .custon-search {
   width: 500px;
 }
+
+@media (max-width: 767px) {
+  .icons-header {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+  .logo {
+    height: 60px !important;
+    justify-content: flex-start;
+  }
+}
 </style>
 
 <template>
-  <v-app-bar app color="#d1efec" elevation="2">
+  <v-app-bar color="#d1efec" elevation="2">
     <div
       class="d-flex flex-wrap justify-space-between align-center w-100 pl-4 pr-4"
     >
       <v-btn
         variant="text"
         to="/"
-        class="text-h6 text-white font-weight-bold text-center w-100 w-sm-auto"
+        class="text-h6 text-white font-weight-bold text-center w-100 w-sm-auto logo"
       >
         Logo
       </v-btn>
@@ -80,7 +92,7 @@ const toggleFavorites = () => {
         ></v-text-field>
       </div>
 
-      <div>
+      <div class="icons-header">
         <v-btn icon @click="toggleFavorites" class="mx-2">
           <v-icon color="white">mdi-heart</v-icon>
         </v-btn>
