@@ -1,4 +1,4 @@
-import type { Module } from "vuex";
+import type { Module } from "vuex/types/index.js";
 import type { Product } from "../../types/movie";
 
 interface FavoritesState {
@@ -19,34 +19,33 @@ const favorites: Module<FavoritesState, unknown> = {
     isFavoritesVisible: false,
   },
   mutations: {
-    ADD_TO_FAVORITES(state, product: Product) {
+    ADD_TO_FAVORITES(state: FavoritesState, product: Product) {
       state.favorites.push(product);
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
-    REMOVE_FROM_FAVORITES(state, title: string) {
+    REMOVE_FROM_FAVORITES(state: FavoritesState, title: string) {
       state.favorites = state.favorites.filter((item) => item.title !== title);
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     },
-    CLEAR_FAVORITES(state) {
-      console.log("teste");
+    CLEAR_FAVORITES(state: FavoritesState) {
       state.favorites = [];
       localStorage.removeItem("favorites");
     },
-    TOGGLE_FAVORITES(state) {
+    TOGGLE_FAVORITES(state: FavoritesState) {
       state.isFavoritesVisible = !state.isFavoritesVisible;
     },
-    SHOW_FAVORITES(state) {
+    SHOW_FAVORITES(state: FavoritesState) {
       state.isFavoritesVisible = true;
     },
-    HIDE_FAVORITES(state) {
+    HIDE_FAVORITES(state: FavoritesState) {
       state.isFavoritesVisible = false;
     },
   },
   getters: {
-    favoriteItems: (state) => state.favorites,
-    isInFavorites: (state) => (title: string) =>
+    favoriteItems: (state: FavoritesState) => state.favorites,
+    isInFavorites: (state: FavoritesState) => (title: string) =>
       state.favorites.some((item) => item.title === title),
-    isFavoritesVisible: (state) => state.isFavoritesVisible,
+    isFavoritesVisible: (state: FavoritesState) => state.isFavoritesVisible,
   },
 };
 

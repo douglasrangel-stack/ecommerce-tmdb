@@ -23,6 +23,7 @@ defineProps<{
     style="padding-bottom: 14rem"
     max-width="450"
   >
+    <h3 class="text-h5 font-weight-medium mb-4">Resumo</h3>
     <div v-if="cartItems.length > 0" class="d-flex flex-column ga-2">
       <CartItem
         v-for="item in cartItems"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-ignore
 import { ref, onMounted, inject, watch, type Ref } from "vue";
 
 import List from "../components/List.vue";
@@ -31,7 +32,7 @@ function mapMoviesWithGenres(moviesList: Movie[]) {
   return moviesList.map((movie) => ({
     id: movie.id,
     title: movie.title,
-    genre_names: genres.value[movie.genre_ids[0]],
+    genre_names: (genres.value as Record<number, string>)[movie.genre_ids![0]],
     poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
     release_date: movie.release_date,
     vote_average: movie.vote_average,

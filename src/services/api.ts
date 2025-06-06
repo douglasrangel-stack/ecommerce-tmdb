@@ -30,7 +30,7 @@ export const fetchGenresApi = async () => {
   }
 };
 
-export const searchMovies = async (query) => {
+export const searchMovies = async (query: string) => {
   try {
     const response = await api.get("/search/movie", {
       params: {

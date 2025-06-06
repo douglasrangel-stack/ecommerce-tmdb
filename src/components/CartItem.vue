@@ -16,7 +16,7 @@ const props = defineProps<{
   isFavorite?: boolean;
 }>();
 
-const emit = defineEmits<{
+defineEmits<{
   (e: "remove", title: string): void;
 }>();
 
