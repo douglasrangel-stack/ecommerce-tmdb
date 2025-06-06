@@ -82,6 +82,7 @@ export default {
               dense
               :error="!!errors.nome"
               :error-messages="errors.nome"
+              data-testid="input-nome"
             />
           </v-col>
           <v-col cols="12" md="6">
@@ -93,6 +94,7 @@ export default {
               v-mask="'###.###.###-##'"
               :error="!!errors.cpf"
               :error-messages="errors.cpf"
+              data-testid="input-cpf"
             />
           </v-col>
           <v-col cols="12" md="6">
@@ -104,6 +106,7 @@ export default {
               v-mask="'(##) #####-####'"
               :error="!!errors.celular"
               :error-messages="errors.celular"
+              data-testid="input-celular"
             />
           </v-col>
         </v-row>
@@ -118,6 +121,7 @@ export default {
               type="email"
               :error="!!errors.email"
               :error-messages="errors.email"
+              data-testid="input-email"
             />
           </v-col>
           <v-col cols="12" md="12">
@@ -130,6 +134,7 @@ export default {
               :error="!!errors.cep"
               :error-messages="errors.cep"
               @blur="onCepBlur"
+              data-testid="input-cep"
             />
           </v-col>
           <v-col cols="12">
@@ -140,6 +145,7 @@ export default {
               dense
               :error="!!errors.endereco"
               :error-messages="errors.endereco"
+              data-testid="input-endereco"
             />
           </v-col>
         </v-row>
@@ -154,6 +160,7 @@ export default {
               dense
               :error="!!errors.cidade"
               :error-messages="errors.cidade"
+              data-testid="input-cidade"
             />
           </v-col>
           <v-col cols="12" md="6">
@@ -164,6 +171,7 @@ export default {
               dense
               :error="!!errors.estado"
               :error-messages="errors.estado"
+              data-testid="input-estado"
             />
           </v-col>
         </v-row>
