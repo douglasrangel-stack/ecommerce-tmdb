@@ -1,6 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./style.css";
+import store from "./store";
+import router from "./router";
+import { MotionPlugin } from "@vueuse/motion";
 
 // Vuetify
 import "vuetify/styles";
@@ -15,4 +18,9 @@ const vuetify = createVuetify({
   directives,
 });
 
-createApp(App).use(vuetify).mount("#app");
+createApp(App)
+  .use(vuetify)
+  .use(store)
+  .use(router)
+  .use(MotionPlugin)
+  .mount("#app");

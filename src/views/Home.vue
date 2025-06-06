@@ -1,27 +1,31 @@
 <script setup lang="ts">
-import { computed, provide, ref } from "vue";
-import Header from "./components/Header.vue";
-import Cart from "./components/Cart.vue";
-import Favorites from "./components/Favorites.vue";
+import { ref, onMounted, inject, watch, type Ref } from "vue";
+
+import List from "../components/List.vue";
 import {
   fetchPopularMovies,
   fetchGenresApi,
   searchMovies,
-} from "./services/api";
-import { getRandomPrice } from "./utils";
-import type { Movie } from "./types/movie";
-import { useStore } from "vuex";
+} from "../services/api";
+import { getRandomPrice } from "../utils";
+import type { Movie } from "../types/movie";
 
-const searchQuery = ref("");
 const movies = ref<Movie[]>([]);
 const genres = ref({});
 
-provide("searchQuery", searchQuery);
+const searchQuery = inject<Ref<string>>("searchQuery");
 
-const store = useStore();
+if (!searchQuery) {
+  throw new Error("searchQuery not provided");
+}
 
-const isCartVisible = computed(() => store.getters.isCartVisible);
-const isFavoritesVisible = computed(() => store.getters.isFavoritesVisible);
+watch(
+  searchQuery,
+  (newVal: string) => {
+    handleSearch(newVal);
+  },
+  { immediate: true }
+);
 
 function mapMoviesWithGenres(moviesList: Movie[]) {
   return moviesList.map((movie) => ({
@@ -51,7 +55,6 @@ const fetchGenres = async () => {
 
 async function fetchMovies() {
   try {
-    await fetchGenres();
     const moviesList = await fetchPopularMovies();
     movies.value = mapMoviesWithGenres(moviesList);
   } catch (error) {
@@ -60,10 +63,9 @@ async function fetchMovies() {
 }
 
 async function handleSearch(query: string) {
-  searchQuery.value = query;
   if (query) {
     try {
-      const moviesList = await searchMovies(query);
+      const moviesList: Movie[] = await searchMovies(query);
       movies.value = mapMoviesWithGenres(moviesList);
     } catch (error) {
       console.error("Erro ao buscar filmes:", error);
@@ -72,14 +74,19 @@ async function handleSearch(query: string) {
     await fetchMovies();
   }
 }
+
+onMounted(async () => {
+  document.title = "Home";
+  await fetchGenres();
+  await fetchMovies();
+});
 </script>
 
 <template>
   <v-app>
-    <Header :search="searchQuery" @update:search="handleSearch"></Header>
-    <router-view />
-    <Cart v-if="isCartVisible" />
-    <Favorites v-if="isFavoritesVisible" />
+    <main class="container mx-auto py-8 pt-40 sm:px-4 sm:pt-32">
+      <List :movies="movies" />
+    </main>
   </v-app>
 </template>
 
